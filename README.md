@@ -1,0 +1,1 @@
+# swatchs-line-item-properties
