@@ -1,0 +1,66 @@
+<a href="javascript:void(0);" id="select-background">Select Background</a>
+<div class="swatch clearfix" id="select-background-name" style="display:none;">
+ <h5>Select Background: <span id="select-background-name-value"></span></h5>
+ <div class="swatch-overflow">
+  {% for block in section.blocks %}
+  {% assign swatchb = block.settings.image_links | split: ',' %}
+  <div class="swatch-box">
+  <h6>{{block.settings.title}}</h6>
+   {% for swatcht in swatchb %}
+   <div class="swatch-element style line-item-property__field available">
+    <input class="name-thread-color-swatch" id="name-{{swatcht}}" type="radio" name="properties[Background]" value="{{swatcht}}">
+    <label for="name-{{swatcht}}" style="background-image: url('{{ swatcht | handle | append: '.jpg' | file_img_url: '50x' }}')" title="{{swatcht}}">
+    </label>
+   </div>
+   {% endfor %}
+  </div>
+  {% endfor %}
+  </div>
+</div>
+
+<script>
+	jQuery(function($) {
+      $('#select-background').click(function(e) {
+     	$('#select-background-name').slideToggle(500);
+      });
+      $('#select-background-name input[type=radio]').click(function(e) {
+        var backgroundn = $('#select-background-name input[type=radio]:checked').val();
+        $('#select-background-name-value').html(backgroundn);
+      });
+	});
+</script>
+<style>
+  .swatch h5 {
+    font-family: "Ubuntu","HelveticaNeue","Helvetica Neue",sans-serif;
+    font-weight: 400 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    white-space: normal;
+    font-size: 21px !important;
+    text-transform: unset !important;
+  }
+  .swatch-overflow {
+    height: 150px;
+    overflow-y: scroll;
+  }
+  #select-background-name.swatch label {
+    min-width: 50px !important;
+    height: 50px !important;
+  }
+  #select-background-name {
+    padding: 0px 5px 10px;
+  }
+  #select-background-name .swatch-element {
+    margin: 0px 9px 10px 0 !important;
+  }
+  a#select-background {
+    padding: 5px 15px;
+    margin: 5px;
+    color: white;
+    background: #f042a8;
+  }
+  .swatch-box {
+    display: inline-block;
+    width: 100%;
+ }
+</style>
